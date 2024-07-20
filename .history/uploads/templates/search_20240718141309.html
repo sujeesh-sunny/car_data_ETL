@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Search Vehicles{% endblock %}
+{% block content %}
+    <h1>Search for Vehicles</h1>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.brand_name.label }}
+            {{ form.brand_name(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.transmission_type.label }}
+            {{ form.transmission_type(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.airbag_count.label }}
+            {{ form.airbag_count(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.alloy_wheels.label }}
+            {{ form.alloy_wheels(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+    {% if results %}
+        <h2>Search Results</h2>
+        <ul class="list-group">
+            {% for result in results %}
+                <li class="list-group-item">
+                    <strong>{{ result.model_name }}</strong> (Brand: {{ result.brand.brand_name }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
